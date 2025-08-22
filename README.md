@@ -9,31 +9,13 @@ Tiny, dependency‑free components for:
 
 Works with React 18+, SSR/Next.js safe.
 
----
-
-## File structure
-
-```
-autogrow-input/
-├─ package.json
-├─ tsconfig.json
-├─ tsup.config.ts
-├─ src/
-│  ├─ index.ts
-│  ├─ components/AutoHeightTextarea.tsx
-│  └─ components/AutoWidthInput.tsx
-└─ README.md
-```
-
----
-
 ### Notes
 
 * Uses `useLayoutEffect` to avoid the one‑frame scroll flicker on updates *and* to be SSR‑safe in Next.js.
 * Mirror `<span>` uses identical classes; **consumer must pass the same `className`** they want on the textarea, we reuse it for the mirror.
 * Trailing `\n` is handled with a `\u00A0` shim.
 
-````md
+
 
 ## Install
 
