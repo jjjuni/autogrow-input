@@ -1,0 +1,42 @@
+'use client'
+
+import { TextareaHTMLAttributes, useLayoutEffect, useRef, useState } from "react";
+
+interface AutoHeightTextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  minHeight?: number;
+  value: string;
+}
+
+export const AutoHeightTextarea: React.FC<AutoHeightTextAreaProps> = ({
+  minHeight = 100,
+  value: inputValue,
+  ...props
+}) => {
+  const [textareaHeight, setTextareaHeight] = useState(minHeight);
+  const spanRef = useRef<HTMLSpanElement>(null);
+
+  useLayoutEffect(() => {
+    if (spanRef.current) {
+      const textHeight = spanRef.current.getBoundingClientRect().height;
+      const calculatedHeight = Math.max(minHeight, textHeight);
+      setTextareaHeight(calculatedHeight);
+    }
+  }, [inputValue, minHeight]);
+
+  return (
+    <div className="relative">
+      <span
+        ref={spanRef}
+        className={`${props.className} pointer-events-none absolute whitespace-pre-wrap break-words opacity-0`}>
+        {inputValue || ""}
+        {inputValue?.endsWith("\n") ? "\u00A0" : null}
+      </span>
+      <textarea
+        className={`${props.className}`}
+        style={{ height: `${textareaHeight}px` }}
+        value={inputValue}
+        {...props}
+      />
+    </div>
+  );
+};
