@@ -5,11 +5,13 @@ import { TextareaHTMLAttributes, useLayoutEffect, useRef, useState } from "react
 interface AutoHeightTextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   minHeight?: number;
   value: string;
+  spanClassName?: string;
 }
 
 export const AutoHeightTextarea: React.FC<AutoHeightTextAreaProps> = ({
   minHeight = 100,
   value: inputValue,
+  spanClassName,
   ...props
 }) => {
   const [textareaHeight, setTextareaHeight] = useState(minHeight);
@@ -27,7 +29,7 @@ export const AutoHeightTextarea: React.FC<AutoHeightTextAreaProps> = ({
     <div className="relative">
       <span
         ref={spanRef}
-        className={`${props.className} pointer-events-none absolute whitespace-pre-wrap break-words opacity-0`}>
+        className={`${props.className} ${spanClassName} pointer-events-none absolute whitespace-pre-wrap break-words opacity-0`}>
         {inputValue || ""}
         {inputValue?.endsWith("\n") ? "\u00A0" : null}
       </span>

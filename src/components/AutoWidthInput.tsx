@@ -3,11 +3,13 @@ import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
 interface AutoWidthInputProps extends InputHTMLAttributes<HTMLInputElement> {
   minWidth?: number;
   value: string;
+  spanClassName?: string;
 }
 
 export const AutoWidthInput: React.FC<AutoWidthInputProps> = ({
   minWidth = 0,
   value,
+  spanClassName,
   ...props
 }) => {
 
@@ -27,7 +29,7 @@ export const AutoWidthInput: React.FC<AutoWidthInputProps> = ({
     <div className={`relative`}>
       <span
         ref={spanRef}
-        className={`${props.className} pointer-events-none opacity-0 absolute`}>
+        className={`${props.className} ${spanClassName} pointer-events-none opacity-0 absolute`}>
         {value}
       </span>
       <input 
