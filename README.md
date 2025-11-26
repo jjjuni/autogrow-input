@@ -27,7 +27,7 @@ pnpm add autogrow-input
 ## Usage
 
 ```tsx
-import { AutoGrowTextarea, AutoWidthInput } from "autogrow-input";
+import { AutoHeightTextarea, AutoWidthInput } from "autogrow-input";
 
 export default function Demo() {
   const [text, setText] = useState("");
@@ -35,7 +35,7 @@ export default function Demo() {
 
   return (
     <div>
-      <AutoGrowTextarea
+      <AutoHeightTextarea
         className="w-full p-3 border rounded"
         value={text}
         onChange={(e) => setText(e.target.value)}
