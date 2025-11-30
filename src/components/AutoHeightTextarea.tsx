@@ -1,6 +1,7 @@
 import { TextareaHTMLAttributes, useLayoutEffect, useRef, useState, forwardRef } from "react";
 
-interface AutoHeightTextAreaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'value'> {
+interface AutoHeightTextAreaProps
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "value"> {
   value: string;
   minHeight?: number;
   maxHeight?: number;
@@ -22,10 +23,10 @@ export const AutoHeightTextarea = forwardRef<HTMLTextAreaElement, AutoHeightText
     }, [inputValue, minHeight]);
 
     return (
-      <div className={`${containerClassName} relative`} style={{ width: `100%`, height: `${textareaHeight}px` }}>
+      <div className={`${containerClassName} relative`} style={{ width: "100%", height: `${textareaHeight}px` }}>
         <span
           ref={spanRef}
-          className={`${props.className} ${spanClassName}`}
+          className={spanClassName}
           style={{
             pointerEvents: "none",
             position: "absolute",
@@ -34,12 +35,12 @@ export const AutoHeightTextarea = forwardRef<HTMLTextAreaElement, AutoHeightText
             opacity: 0,
           }}
         >
-          {inputValue || ""}
-          {inputValue?.endsWith("\n") ? "\u00A0" : null}
+          {inputValue}
+          {inputValue.endsWith("\n") ? "\u00A0" : null}
         </span>
         <textarea
-          ref={ref}
-          className={`${props.className}`}
+          ref={ref} // <- forwardRef를 통해 ref 전달
+          className={props.className}
           style={{ height: `${textareaHeight}px` }}
           value={inputValue}
           {...props}
@@ -47,6 +48,6 @@ export const AutoHeightTextarea = forwardRef<HTMLTextAreaElement, AutoHeightText
       </div>
     );
   }
-);
+) as React.ForwardRefExoticComponent<AutoHeightTextAreaProps & React.RefAttributes<HTMLTextAreaElement>>;
 
 AutoHeightTextarea.displayName = "AutoHeightTextarea";
