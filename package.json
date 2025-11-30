@@ -1,6 +1,6 @@
 {
   "name": "autogrow-input",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Auto-growing textarea and auto-width input components for React",
   "license": "MIT",
   "type": "module",
