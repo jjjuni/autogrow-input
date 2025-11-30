@@ -4,14 +4,18 @@ import { TextareaHTMLAttributes, useLayoutEffect, useRef, useState } from "react
 
 interface AutoHeightTextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   minHeight?: number;
+  maxHeight?: number;
   value: string;
   spanClassName?: string;
+  containerClassName?: string;
 }
 
 export const AutoHeightTextarea: React.FC<AutoHeightTextAreaProps> = ({
   minHeight = 100,
+  maxHeight = 500,
   value: inputValue,
   spanClassName,
+  containerClassName,
   ...props
 }) => {
   const [textareaHeight, setTextareaHeight] = useState(minHeight);
@@ -20,13 +24,13 @@ export const AutoHeightTextarea: React.FC<AutoHeightTextAreaProps> = ({
   useLayoutEffect(() => {
     if (spanRef.current) {
       const textHeight = spanRef.current.getBoundingClientRect().height;
-      const calculatedHeight = Math.max(minHeight, textHeight);
+      const calculatedHeight = Math.min(Math.max(minHeight, textHeight), maxHeight);
       setTextareaHeight(calculatedHeight);
     }
   }, [inputValue, minHeight]);
 
   return (
-    <div className="relative" style={{ height: `${textareaHeight}px` }}>
+    <div className={`${containerClassName} relative`} style={{ width: `100%`, height: `${textareaHeight}px` }}>
       <span
         ref={spanRef}
         className={`${props.className} ${spanClassName}`}
