@@ -26,10 +26,17 @@ export const AutoHeightTextarea: React.FC<AutoHeightTextAreaProps> = ({
   }, [inputValue, minHeight]);
 
   return (
-    <div className="relative">
+    <div className="relative" style={{ height: `${textareaHeight}px` }}>
       <span
         ref={spanRef}
-        className={`${props.className} ${spanClassName} pointer-events-none absolute whitespace-pre-wrap break-words opacity-0`}>
+        className={`${props.className} ${spanClassName}`}
+        style={{
+          pointerEvents: "none",
+          position: "absolute",
+          whiteSpace: "pre-wrap",
+          wordBreak: "break-word",
+          opacity: 0,
+        }}>
         {inputValue || ""}
         {inputValue?.endsWith("\n") ? "\u00A0" : null}
       </span>
