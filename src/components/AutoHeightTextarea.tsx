@@ -23,7 +23,7 @@ export const AutoHeightTextarea = forwardRef<HTMLTextAreaElement, AutoHeightText
     }, [inputValue, minHeight]);
 
     return (
-      <div className={`${containerClassName} relative`} style={{ width: "100%", height: `auto` }}>
+      <div className={`${containerClassName} relative`} style={{ width: "100%", height: `${textareaHeight}px` }}>
         <span
           ref={spanRef}
           className={spanClassName}
