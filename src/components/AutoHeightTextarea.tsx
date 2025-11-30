@@ -8,6 +8,7 @@ interface AutoHeightTextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaEle
   value: string;
   spanClassName?: string;
   containerClassName?: string;
+  textareaRef?: React.RefObject<HTMLTextAreaElement | null>
 }
 
 export const AutoHeightTextarea: React.FC<AutoHeightTextAreaProps> = ({
@@ -16,6 +17,7 @@ export const AutoHeightTextarea: React.FC<AutoHeightTextAreaProps> = ({
   value: inputValue,
   spanClassName,
   containerClassName,
+  textareaRef,
   ...props
 }) => {
   const [textareaHeight, setTextareaHeight] = useState(minHeight);
@@ -45,6 +47,7 @@ export const AutoHeightTextarea: React.FC<AutoHeightTextAreaProps> = ({
         {inputValue?.endsWith("\n") ? "\u00A0" : null}
       </span>
       <textarea
+        ref={textareaRef}
         className={`${props.className}`}
         style={{ height: `${textareaHeight}px` }}
         value={inputValue}
